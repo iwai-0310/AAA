@@ -17,7 +17,7 @@ export class UserService {
     .pipe(map(response=>this.processResponse(response)))
   }
   //fetch a single user using uuid
-  getUser(uuid:number=1):Observable<any>{
+  getUser(uuid:string):Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/?uuid=${uuid}`)
     .pipe(map(response => this.processResponse(response)))
   }
@@ -33,7 +33,7 @@ export class UserService {
         username:user.login.username,
         gender:user.gender,
         address:`House No:${user.location.street.number},${user.location.street.name},${user.location.city},${user.location.country}`,
-        dateofBirth:user.date,
+        dateofBirth:user.dob.date,
         phone:user.phone,
         imageUrl:user.picture.medium,
         coordinate:{latitude:+user.location.coordinates.latitude,
