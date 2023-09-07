@@ -12,14 +12,14 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   //fetch users
-  getUsers(size:number=10):Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/?results=${size}`)
-    .pipe(map(response=>this.processResponse(response)))
+  getUsers(size:number=10):Observable<Response>{
+    return this.http.get<Response>(`${this.apiUrl}/?results=${size}`)
+    .pipe(map(this.processResponse))
   }
   //fetch a single user using uuid
-  getUser(uuid:string):Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/?uuid=${uuid}`)
-    .pipe(map(response => this.processResponse(response)))
+  getUser(uuid:string):Observable<Response>{
+    return this.http.get<Response>(`${this.apiUrl}/?uuid=${uuid}`)
+    .pipe(map(this.processResponse))
   }
 
   private processResponse(response:Response):Response{
