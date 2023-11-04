@@ -4,6 +4,7 @@ import { UserService } from 'src/app/service/user.service';
 import { User } from '../../inteface/user.interface'
 import { Coordinate } from 'src/app/inteface/coordinate.interface';
 import * as Leaflet from 'leaflet'
+import { loadModules } from 'esri-loader';
 
 @Component({
   selector: 'app-userdetail',
@@ -67,6 +68,31 @@ export class UserdetailComponent implements OnInit {
     const marker = Leaflet.marker([coordinate.latitude, coordinate.logitude], { icon: this.marker })
     marker.addTo(map).bindPopup(`${this.user.firstName}'s Location`).openPopup();
   }
+  initializeMap() {
+    loadModules(["esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Search"])
+      .then(([esriConfig, Map, MapView, Search]) => {
+        esriConfig.apiKey = "YOUR_API_KEY"; // Replace with your API key
 
+        const map = new Map({
+          basemap: "arcgis-navigation"
+        });
+
+        const view = new MapView({
+          map,
+          center: [-122.3321, 47.6062], // Longitude, latitude
+          zoom: 12, // Zoom level
+          container: "viewDiv" // Div element
+        });
+
+        const search = new Search({
+          view
+        });
+
+        view.ui.add(search, "top-right");
+      })
+      .catch(error => {
+        console.error("Error loading ArcGIS modules:", error);
+      });
+  }
 
 }
