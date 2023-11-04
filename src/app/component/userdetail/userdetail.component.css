@@ -34,7 +34,12 @@
   #map {
     height: 100%;
   }
-  
+  #viewDiv{
+    padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+  }
   input:disabled {
     border: 0;
     outline: 0;
