@@ -31,6 +31,7 @@ export class UserdetailComponent implements OnInit {
     this.user = (<User>(this.activatedRoute.snapshot.data['resolvedResponse'].results[0]))
     console.log(this.user)
     this.loadMap(this.user.coordinate)
+    this.initializeMap();
     // this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
     //   console.log('User ID:',params.get('uuid')!)
     //   this.userService.getUser(params.get('uuid')!).subscribe(
@@ -71,7 +72,7 @@ export class UserdetailComponent implements OnInit {
   initializeMap() {
     loadModules(["esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Search"])
       .then(([esriConfig, Map, MapView, Search]) => {
-        esriConfig.apiKey = "YOUR_API_KEY"; // Replace with your API key
+        esriConfig.apiKey = "AAPK55a205179cb4403d99f7e33d86d96bd7QHWLJF3NTC9GaOe7e26nDsWVx8NBFzRSnXcuU2Lrncrp4xkq3LscKZWsrfYF5dXL"; // Replace with your API key
 
         const map = new Map({
           basemap: "arcgis-navigation"
@@ -85,7 +86,7 @@ export class UserdetailComponent implements OnInit {
         });
 
         const search = new Search({
-          view
+          view:view
         });
 
         view.ui.add(search, "top-right");
